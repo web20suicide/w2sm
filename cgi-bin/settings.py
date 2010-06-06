@@ -1,13 +1,9 @@
 import MySQLdb,sys
 
 def connect_db():
-#host_name = "mysqlsvr10.world4you.com"
-#	user_name ="yugoat"
-#	password ="7jx9t"
-#	db_name="yugoatdb6"
 	host_name = "localhost"
-	user_name ="gordo"
-	password ="mockshow"
+	user_name ="killer"
+	password ="killer"
 	db_name="web20suicide"
 
 	try:
