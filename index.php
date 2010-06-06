@@ -190,7 +190,7 @@
 				</div>
 				<div class="col">PROMOTE US
 					<ul>
-						<li><script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=a8ad1cc4-06df-4d13-92da-979e26c687c4&amp;type=website"></script></li>
+						<li><a href="http://www.suicidemachine.org">www.suicidemachine.org</a></li>
 					</ul>
 				</div><br>
 				<div id="subcontent"></div>
