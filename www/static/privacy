@@ -1,0 +1,34 @@
+<h1>Frequently Asked Questions</h1><br />
+<p class="question">If I kill my online friends, does it mean they're also dead in real life?</p>
+<p class="answer">No!</p>
+<p>&nbsp;</p>
+<p class="question">What do I need to commit suicide with the Web 2.0 Suicide Machine?</p>
+<p class="answer">A standard webbrowser with Adobe flashplugin and javascript enabled. So, it runs on Windows, Linux and Mac.</p>
+<p>&nbsp;</p>
+<p class="question">I can't see my friends being killed, what happened?</p>
+<p class="answer">Probably your flash-plugin is older than version 10? But yikes - you cannot stop the process anymore! Once you entered the login details, the machine is running the suicide script.  </p>
+<p>&nbsp;</p>
+<p class="question">If I start killing my 2.0-self, can <b>I</b> stop the process?</p>
+<p class="answer">No!</p>
+<p>&nbsp;</p>
+<p class="question">If I start killing my 2.0-self, can <b>YOU</b> stop the process?</p>
+<p class="answer">No!</p>
+<p>&nbsp;</p>
+<p class="question">Do you store any data on your webserver, like password of the user?</p>
+<p class="answer">We don't store your password on your server! Seriously, it goes directly into /dev/null, which is equal to nirvana! We only save your profile picture, your name and your last words! </p>
+<p>&nbsp;</p>
+<p class="question">Will the 2.0 suicide machine be available for other networks such as twitter and plaxo?</p>
+<p class="answer">We are currently working on improving our products!</p>
+<p>&nbsp;</p>
+<p class="question">How does it work technically?</p>
+<p class="answer">The machine consists of a tweaked Linux server running apache2 with python module. Selenium RC Control is used to automatically launch and kill browser sessions. This all driven by a single python/cgi script with some additional self-written libraries.  <br />
+									Each user can watch her suicide action in real-time via a VNC remote desktop session, displayed on our website via an flash applet rendered live into the client's webbrowser. 
+									We are also running some customized bash scripts plus MySQL in the background for logging and debugging, jquery for the website and a modified version of the great FlashlightVNC application built in Flex. 
+									Web2.0 Suicide Machine consists of roughly 1500 lines of self-written code. </p>
+<p>&nbsp;</p>
+<p class="question"></p>
+<p class="answer">Facebook: you can only deactivate your profile and a simple login will reactivate it. Remember: they're going to hold all your informations and pictures on their servers forever! </p>
+<p>&nbsp;</p>
+<p class="question"></p>
+<p class="answer"></p>
+<p>&nbsp;</p>
