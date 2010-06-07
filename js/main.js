@@ -2,28 +2,7 @@ jQuery(document).ready(function($) {
 	// turn off ajax caching
 	$.ajaxSetup ({ cache: false });
 
-services = new Array('facebook', 'myspace', 'twitter', 'linkedin');
-selected = "twitter";
-function w2sm_check() { 
- $.ajax({
-	 type: "GET",
-	 url: "./cgi-bin/available.cgi",
-	 success: function(msg){
-		var single=msg.split("<|>"); 
-		var image_urls = "";
-		for (var j in services) {
-				if ($.inArray(services[j],single) != "-1") {
-					image_urls += "<img src='./img/small_" + services[j] + "_grey.png' border='0'>";
-				}
-				else {
-					image_urls += "<a href=\"#\" class=\"button_signout\" id=\"" + services[j] + "\"><img id=\"button_" + services[j] + "\" alt=\"signout_" + services[j] + "\" src=\"./img/small_" + services[j] + ".png\"></a>";
-				}
-		
-}
-		$('#signout_buttons').html(image_urls);
-	 }
- });
-}
+	selected = "twitter";
 
 	// set background opacity for facebox
 	$.facebox.settings.opacity = 0.6; /* add this line */ 
@@ -50,10 +29,8 @@ function w2sm_check() {
 	}
 	// load quovolver for changing quotes
 	$('blockquote').quovolver();
-	// load faceboxes for static pages
 	// hide some divs from the beginning
 	$('#login').css('display','none');
-
 
 	// load some static html
 	$('#signout_others_os').load("static/stats.html");
@@ -192,18 +169,17 @@ function w2sm_check() {
 				this.beenSubmitted = true;
 				// call bash script which checks available XVNC session
 				var datadata = "id=" + form.id + "&" + $(form).serialize() ;
-				var job_id = "";
+				var job_id = "1";
 								// collect all form fields
 								var dataString = $(form).serialize();
 								// remove trailing whitespaces or CR...
 								dataString = "id=" + job_id + "&" + dataString;
 								$.ajax({  	type: "POST",
-										url: "./cgi-bin/web20_dump.cgi",
+										url: "../cgi-bin/web20_dump.cgi",
 										data: dataString,
 										// if form data VALID launch VNC and hide input fields
 										success: function(r) { 
-											vncport = "590" + job_id;
-											jQuery.facebox('<embed width="800px" height="600px" allowscriptaccess="sameDomain" quality="high" bgcolor="#000000" play="true" expressinstall="true" type="application/x-shockwave-flash" src="../FLViewer.swf" pluginspage="http://www.adobe.com/go/getflashplayer" flashvars="host=suicidemachine.org&password=killer&port='+vncport+'&viewOnly=true&autoConnect=false&shared=true"/>');
+											//alert("lets begin" + dataString);
 										}
 								});
 							}
@@ -213,9 +189,5 @@ function w2sm_check() {
 				}
 			});
 	});
-
-	// initialize the vnc session (parsing portnumber!)
-	function startVNC (vnc) {
-		}
 });
 

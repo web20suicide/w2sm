@@ -2,13 +2,9 @@
 from selenium import selenium
 from pyfiglet import Figlet
 import settings,MySQLdb
-import suicide_flickr 
 import suicide_twitter
 import suicide_facebook
-import suicide_hyves
-import suicide_linkedin
 import suicide_myspace
-import suicide_hcstrache
 import unittest, time, re
 import os, sys, select
 import random,cgi
@@ -18,7 +14,7 @@ import logging
 from logging import handlers, Formatter
 
 # GLOBAL USER SETTINGS -- CHANGE THIS!!!!!
-newpassword = "m0ddr_pw3nd"
+newpassword = "chuckn0rr1s"
 
 #*******************************************************
 # global settings
@@ -35,6 +31,12 @@ def figlet_counter(f):
 	time.sleep(0.8)
 	print f.renderText("1")
 	time.sleep(0.8)
+
+def kill_all():
+	killpython = "killall -9 python"
+	killjava = "killall -9 java"
+	os.system(killjava)
+	os.system(killpython)
 
 def send_notification(name,user_id):
 	SENDMAIL = "/usr/sbin/sendmail" # sendmail location
@@ -84,15 +86,6 @@ def send_login_error(name):
 	if sts != 0:
 		print "Sendmail exit status", sts
 		logging.info("mail sent to " + name)
-
-def kill_vnc(vnc,session_id):
-	cmdremove = "rm -Rf /home/killer/.mozilla/firefox/*.444%s" %session_id
-	os.system(cmdremove)
-	logging.info("removed firefox profile at /home/killer/.mozilla/firefox/*.444" + str(session_id))
-	logging.info("**********************************************************************************")
-	logging.info("**********************************************************************************")
-	cmdkill = "vncserver -kill :%s" %vnc
-	os.system(cmdkill)
 
 def quit_log(vnc):
 	logging.debug("session ending at "+time.asctime())
@@ -153,37 +146,6 @@ def login_process(name, password,website,port,vnc,f,lastwords,session_id):
 		random_wait = random.randint(7,14)
 		time.sleep(random_wait)
 		try:
-			splitted = lastwords.split("/")
-			month = splitted[1]
-			if month != "10":
-				month = month.strip("0")	
-			day = splitted[0]
-			year = splitted[2]
-			click_day = "label=" + day
-			click_month = "value=" + month
-			click_year = "label=" + year
-			logging.info("sel.select day: " + click_day)
-			logging.info("sel.click: " + click_month)
-			logging.info("sel.select year: " + click_year)
-			logging.info("birthday is: " + day + "/" + month + "/" + year)
-			sel.select("birthday_captcha_month",click_month)
-			random_wait = random.randint(1,2)
-			time.sleep(random_wait)
-			sel.select("birthday_captcha_day", click_day)
-			random_wait = random.randint(1,2)
-			time.sleep(random_wait)
-			sel.select("birthday_captcha_year", click_year)
-			random_wait = random.randint(1,2)
-			time.sleep(random_wait)
-			sel.type("email", name)
-			sel.type("pass", password)
-			time.sleep(2)
-			sel.click("login")
-			time.sleep(2)
-			logging.info("entered the date and clicked ok")
-		except:
-			pass
-		try:
 			sel.open("http://www.facebook.com/editaccount.php?ref=mb")
 			random_wait = random.randint(1,4)
 			time.sleep(random_wait)
@@ -203,8 +165,8 @@ def login_process(name, password,website,port,vnc,f,lastwords,session_id):
 			tearDown(sel)
 			logging.warning("login failed")
 			logging.warning("sending login warning to: " + name)
-			send_login_error(name)
-			quit_log(vnc)
+#send_login_error(name)
+#			quit_log(vnc)
 			os.system("python /usr/lib/cgi-bin/web20clean_database.cgi 2> /dev/null")
 			print f.renderText("wrong password! please try again!")
 			print f.renderText("your activity has been logged!")
@@ -212,8 +174,7 @@ def login_process(name, password,website,port,vnc,f,lastwords,session_id):
 			time.sleep(random_wait)
 			print f.renderText("aborting suicide now..!")
 			figlet_counter(f)
-			time.sleep(1)
-			kill_vnc(vnc,session_id)
+			kill_all()
 	#################################################
 	# twitter 
 	################################################
@@ -248,19 +209,9 @@ def login_process(name, password,website,port,vnc,f,lastwords,session_id):
 			time.sleep(1)
 			figlet_counter(f)
 			time.sleep(1)
-			kill_vnc(vnc,session_id)
+#kill_vnc(vnc,session_id)
 		logging.info("[ok] logged in now")
 
-	#################################################
-	# check ip test 
-	################################################
-	elif website == "http://agenda.wormweb.nl":
-	#elif website == "http://www.ericgiguere.com/tools/http-header-viewer.html":
-		while (1):
-			time.sleep(1)
-		quit_log(vnc)
-		tearDown(sel)
-		kill_vnc(vnc,session_id)
 	#################################################
 	# myspace 
 	################################################
@@ -297,12 +248,11 @@ def login_process(name, password,website,port,vnc,f,lastwords,session_id):
 				time.sleep(1)
 				figlet_counter(f)
 				time.sleep(1)
-				kill_vnc(vnc,session_id)
+#kill_vnc(vnc,session_id)
 			logging.info("[ok] logged in now")
 		except:
 			tearDown(sel)
 			send_login_error(name)
-			#send_login_error("gordo@yugo.at")
 			quit_log(vnc)
 			os.system("python /usr/lib/cgi-bin/web20clean_database.cgi 2> /dev/null")
 			print f.renderText("wrong password!")
@@ -314,103 +264,7 @@ def login_process(name, password,website,port,vnc,f,lastwords,session_id):
 			time.sleep(random_wait)
 			figlet_counter(f)
 			time.sleep(1)
-			kill_vnc(vnc,session_id)
-	#################################################
-	# flickr opppp
-	################################################
-	elif website == "http://www.flickr.com":
-		try:
-			sel.click("link=Sign Out")
-			random_wait = random.randint(5,9)
-			time.sleep(random_wait)
-		except:
-			pass
-		sel.click("link=Sign In")
-		random_wait = random.randint(5,9)
-		time.sleep(random_wait)
-		try:
-			random_wait = random.randint(2,4)
-			time.sleep(random_wait)
-			sel.click("link=Sign in as a different user.")
-			random_wait = random.randint(1,3)
-			time.sleep(random_wait)
-		except:
-			pass
-		sel.type("username", name)
-		random_wait = random.randint(1,2)
-		time.sleep(random_wait)
-		sel.type("passwd", password)
-		sel.click(".save")
-		random_wait = random.randint(8,12)
-		time.sleep(random_wait)
-		try:
-			sel.click("//div[@id='y-photostream']/div[1]/div[1]/div[2]/h2/a")
-		except:
-			try:
-				sel.click("//img[@alt='More options']")
-				sel.click("link=Your Photostream")
-			except:
-				sel.click("Your Photostream")
-	####################################
-	## LINKED INNNNNNNN YOOOOOOO
-	###################################
-	elif website == "http://www.linkedin.com":
-		try:
-			sel.click("link=Sign In")
-			random_wait = random.randint(6,12)
-			time.sleep(random_wait)
-			sel.type("session_key-login", name)
-			random_wait = random.randint(1,2)
-			time.sleep(random_wait)
-			sel.type("session_password-login", password)
-			random_wait = random.randint(1,2)
-			time.sleep(random_wait)
-			sel.click("session_login")
-			logging.info("clicked the login button")
-			random_wait = random.randint(10,12)
-			time.sleep(random_wait)
-
-			if (sel.is_element_present("//div[@id='home-inbox']")) != 1:
-				logging.warning("[failed] login wrong")
-				tearDown(sel)
-				send_login_error(name)
-				quit_log(vnc)
-				os.system("python /usr/lib/cgi-bin/web20clean_database.cgi 2> /dev/null")
-				print f.renderText("wrong password!")
-				random_wait = random.randint(5,12)
-				time.sleep(random_wait)
-				kill_vnc(vnc,session_id)
-
-			logging.warning("[ok] logged in now")
-		except:
-			pass
-
-	############################################
-	### DON'T BELIEVE THE HYVES
-	###########################################
-	elif website == "http://www.hyves.nl":
-		random_wait = random.randint(1,2)
-		time.sleep(random_wait)
-		sel.type("auth_username_id", name)
-		random_wait = random.randint(1,2)
-		time.sleep(random_wait)
-		sel.type("auth_password_id", password)
-		random_wait = random.randint(1,2)
-		time.sleep(random_wait)
-		sel.click("btnLogin")
-		try:
-			random_wait = random.randint(8,12)
-			time.sleep(random_wait)
-			sel.click("myMenuLnk")
-			random_wait = random.randint(3,4)
-			time.sleep(random_wait)
-			sel.click("//div[@id='_popupDialog_myMenu_body']/table/tbody/tr/td[2]/div[11]/a[1]")
-			random_wait = random.randint(3,4)
-			time.sleep(random_wait)
-		except:
-			pass
-
-	return sel
+#kill_vnc(vnc,session_id)
 
 def tearDown(sel):
 	sel.stop()
@@ -421,8 +275,10 @@ def tearDown(sel):
 ###################################################
 while 1:
 	job_id = sys.argv[1]
+ 	# select recent post
 	q = "SELECT * FROM friendbot WHERE job_id = '"+job_id+"' ORDER BY t_create"
 	cursor.execute(q)
+	# get current row
 	row = cursor.fetchone()
 	time.sleep(1.5)
 
@@ -441,19 +297,9 @@ while 1:
 		lastwords = variables.get('lastwords')[0]
 		session_id = variables.get('session_id')[0]
 
-		tmp_id = os.popen('cat /var/www/tmp/session_id').readline()
-		tmp_id = tmp_id.strip()
-
-		#print "using sessionID: " + session_id
-		cmdprofile = "echo /home/killer/.mozilla/firefox/*.444%s" %session_id
-		firefox_profile = os.popen(cmdprofile).readline()
-		firefox_profile = firefox_profile.strip()
-
 		# delete fetched row, clean the commando database
 		q = "DELETE FROM friendbot WHERE id=%s"
 		cursor.execute(q, (row['id'],))
-		#print "cleaned up tmp database"
-	
 
 		try:
 			log_filename = "/tmp/suicide_log.out%s" %vnc
@@ -461,10 +307,7 @@ while 1:
 			logging.info("**********************************************************************************")
 			logging.info("new session starting: "+time.asctime())
 			logging.info("session ID used for firefox is: " + session_id)
-			logging.info("temp ID from /var/www/tmp/session id was: " + str(tmp_id))
-			logging.info("firefox profile is located: " + str(firefox_profile))
 			logging.info("userIP: " + ip + " @ " + host)
-			logging.info("VNCport: "+ vnc)
 			logging.info("website: "+ website)
 			logging.info("user: " + name + " using password: "+password)
 
@@ -475,88 +318,38 @@ while 1:
 			print ""
 			passwordtxt = "password is *******"
 			print f.renderText(passwordtxt)
-			if (name == "gordo@yugo.at"):
-				#website = "http://www.ericgiguere.com/tools/http-header-viewer.html"
-				#website = "http://agenda.wormweb.nl"
-				sel = login_process(name,password,website,port,vnc,f,lastwords,session_id) # login
-			else:
-				sel = login_process(name,password,website,port,vnc,f,lastwords,session_id) # login
 
 			######################################################
 			# FACEBOOK
 			#######################################################
 			if(row['command'] == "facebook"):
 				print "*** getting rid of your friends... ***"
-				if (name == "gordo@yugo.at" or name == "online@wormweb.nl"):
-					time.sleep(4) # don't hurry
-					suicide_hcstrache.addFriendFriend(sel,50)
-					suicide_facebook.removeFriends(sel,amount)
-					suicide_facebook.logout(sel)
-					logging.info("[ok] tear down selenium. killing done")
-					tearDown(sel) # close selenium
-					print f.renderText("killing done ... quitting now")
-					print ""
-					tearDown(sel) # close selenium
-				else:
-					time.sleep(4) # don't hurry
-					suicide_facebook.changePassword(sel,password,newpassword)
-					logging.info("[ok] changed password")
-					amount,user_id = suicide_facebook.getInfo(sel,lastwords,command,name,password)
-					suicide_facebook.unNotify(sel)
-					#suicide_facebook.removeInfo(sel)
-					suicide_facebook.changePicture(sel,"/usr/lib/cgi-bin/killer.jpg"," went to Web2.0 Suicide Machine and left this empty frontpage... Visit http://suicide.moddr.net to find out more!")
-					logging.info("[ok] changed picture")
-					time.sleep(4) # don't hurry
-					# GS added: stupid facebook change made this function deprecated 14.09.09
-					#suicide_facebook.changeStatus(sel," went to Web2.0 Suicide Machine and left this empty frontpage... Visit http://suicide.moddr.net to find out more!")
-					logging.info("[ok] changed status")
-					suicide_facebook.removeFriends(sel,amount)
-					logging.info("[ok] removed friends")
-					suicide_facebook.delPosts(sel)
-					suicide_facebook.delGroups(sel)
-					suicide_facebook.removeFriends(sel,amount)
-					suicide_facebook.joinGroup(sel)
-					time.sleep(4) # don't hurry
-					logging.info("[ok] joined the Social Network Suicider Group")
-					suicide_facebook.logout(sel)
-					logging.info("[ok] tear down selenium. killing done")
-					tearDown(sel) # close selenium
-					print f.renderText("killing done ... quitting now")
-					print ""
-					random_wait = random.randint(5,12)
-					time.sleep(random_wait)
-
-			######################################################
-			# FLICKR
-			#######################################################
-			elif(row['command'] == "flickr"):
-				print "yoo, delete your photos"
-				amount= variables.get('amount')[0]
 				time.sleep(4) # don't hurry
-				suicide_flickr.delFlickr(sel,amount)
-				tearDown(sel) # close selenium
-
-			######################################################
-			# LINKED IN 
-			#######################################################
-			elif(row['command'] == "linkedin"):
-				print "*** yoo, delete your business links :) ***"
-				suicide_linkedin.changePassword(sel,password,newpassword)
+				suicide_facebook.changePassword(sel,password,newpassword)
 				logging.info("[ok] changed password")
-				friends,user_id = suicide_linkedin.getInfo(sel,lastwords,command,name,password)
-				suicide_linkedin.changePicture(sel,"/usr/lib/cgi-bin/killer.jpg")
+				amount,user_id = suicide_facebook.getInfo(sel,lastwords,command,name,password)
+				suicide_facebook.unNotify(sel)
+				#suicide_facebook.removeInfo(sel)
+				suicide_facebook.changePicture(sel,"/usr/lib/cgi-bin/killer.jpg"," went to Web2.0 Suicide Machine and left this empty frontpage... Visit http://suicide.moddr.net to find out more!")
 				logging.info("[ok] changed picture")
-				random_wait = random.randint(2,5)
-				time.sleep(random_wait)
-				suicide_linkedin.delLinkedIn(sel,friends)
-				logging.info("[ok] linkedin contacts deleted")
-				suicide_linkedin.logout(sel)
-				logging.info("[ok] logging out now")
-				quit_log(vnc)
+				time.sleep(4) # don't hurry
+				# GS added: stupid facebook change made this function deprecated 14.09.09
+				#suicide_facebook.changeStatus(sel," went to Web2.0 Suicide Machine and left this empty frontpage... Visit http://suicide.moddr.net to find out more!")
+				logging.info("[ok] changed status")
+				suicide_facebook.removeFriends(sel,amount)
+				logging.info("[ok] removed friends")
+				suicide_facebook.delPosts(sel)
+				suicide_facebook.delGroups(sel)
+				suicide_facebook.removeFriends(sel,amount)
+				suicide_facebook.joinGroup(sel)
+				time.sleep(4) # don't hurry
+				logging.info("[ok] joined the Social Network Suicider Group")
+				suicide_facebook.logout(sel)
+				logging.info("[ok] tear down selenium. killing done")
 				tearDown(sel) # close selenium
 				print f.renderText("killing done ... quitting now")
 				print ""
-				random_wait = random.randint(3,5)
+				random_wait = random.randint(5,12)
 				time.sleep(random_wait)
 
 			######################################################
@@ -617,13 +410,13 @@ while 1:
 		
 			send_notification(name,user_id)	
 			quit_log(vnc)
-			kill_vnc(vnc,session_id)
+#kill_vnc(vnc,session_id)
 		######################################################
 		# EXCEPTION HANDLER 
 		#######################################################
 		except:
-			logging.exception("[failed] There was a problem. Call DOCTOR gordo")
+			logging.exception("[failed] There was a problem. Please report!")
 			logging.info("Ending SUICIDE MACHINE")
 			send_error_mail(name)
 			quit_log(vnc)
-			kill_vnc(vnc,session_id)
+#kill_vnc(vnc,session_id)

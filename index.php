@@ -11,7 +11,7 @@
 		<meta content="web suicide, facebook death, suicide machine, web 2.0 suicide, unfriending, defriending, committing suicide, linkedin, erase profile, myspace, facebook, online death, social network suicide" name="keywords"/>
 		<title>Web 2.0 Suicide Machine - Meet your Real Neighbours again! - Sign out forever!</title>
 		<link href="./css/suicide.css" type="text/css" rel="stylesheet">
-		<link rel="shortcut icon" href="favicon.ico" >
+		<link rel="shortcut icon" href="./favicon.ico" >
 		<link href="./js/facebox.css" media="screen" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="./js/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="./js/facebox.js"></script>
@@ -72,7 +72,6 @@
 							<img src="./img/small_linkedin_grey.png" border="0">
 							<a href="#" class="button_signout" id="twitter"><img id="button_twitter" src="./img/small_twitter.png"></a>
 							<a href="#" class="button_signout" id="facebook"><img id="button_facebook" alt="signout_facebook" src="./img/nix.png" width="1" height="1"></a>
-							<p style="font-size:60%;color:#FF3F84;font-weight:bold;">Please read the C&amp;D letter from Facebook <a href="./download/Web_2.0_Suicide_Machine.pdf" target="_blank">here</a>!!!</p>
 						</div>		
 					</div>
 				<div id="signout">
