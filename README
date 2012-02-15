@@ -1,0 +1,139 @@
+  																								web2.0 suicidemachine
+  																								http://www.suicidemachine.org
+  
+  																								fresco gamba // www.moddr.net
+  																								killer at moddr dot net
+  
+  																								PRE-RELEASE v.1.03
+  																							  February 14, 2012
+  
+
+# not for the public and with (really) messy code, but hey it's open source...
+
+CONTENTS
+------------------------------------------------------------------------------
+
+- General
+- How does it work?
+- Did you know?
+- What needs to be done?
+
+GENERAL
+------------------------------------------------------------------------------
+
+This is a LiveCD ISO Image based on Ubuntu 10.04 with additional packages 
+installed (the release has been created using remastersys 
+(http://geekconnection/remastersys)
+
+All changes to this ISO are persistent (as long as you've booted up from a 
+writeable medium)
+
+All access is being granted by following login credentials:
+
+USERNAME is killer
+PASSWORD is killer
+
+You can freely redistribute and modify this release by creating your own boot-
+able ISO image. Just start following command from a terminal:
+
+# sudo remastersys backup suicidebuntu.iso 
+
+creates a bootable ISO image /home/remastersys/remastersys/suicidebuntu.iso
+
+Please report all bugs/suggestions to killer@moddr.net or join the irc channel
+#suicidemachine at irc.freenode.net
+
+This pre-alpha release is distributed under the GPL License.
+
+To get more info about the GPL license, visit:
+http://www.opensource.org/licenses/gpl-license.php
+
+HOW DOES IT WORK?
+------------------------------------------------------------------------------
+
+Installed software in order to get web2.0 suicidemachine run:
+
+	apache2	
+	php5 module
+	mysql module
+	python
+	java-common packages
+	firefox
+
+All web-related stuff is stored in /var/www/w2sm
+All cgi-scripts in /usr/lib/cgi-bin
+
+An install script which has been used on this release is available in:
+/home/killer/install.sh (if you've booted this release, you DON'T need
+		to execute this file AGAIN!!!)
+
+Please note that /usr/lib/cgi-bin is under version controlling using GITHUB. 
+If you've done major contributions and/or improvements please commit your 
+changes and mind conflicting stuff. Don't screw things up!
+The password for pushing changes can be requested from killer@moddr.net
+
+The GIT repository is hosted at http://www.github.com
+
+Software repository is: 
+
+Once a user completes the form on the website, all his/her information is 
+temporarily stored in a mySQL database (/usr/lib/cgi-bin/web20_dump.cgi).
+Get an overview of the database by typing following URL into your browser:
+-> http://localhost/phpmyadmin
+
+
+	* /usr/lib/cgi-bin/web20_dump.cgi
+	
+	This script will launch two xterm windows, one for the python script 
+	(web20suicide.cgi) and one for launching the selenium java server 
+	(start_selenium.sh), which will eventually control the Firefox webbrowser.
+
+	* /usr/lib/cgi-bin/settings.py
+
+	Here are setting connections for mySQL stored
+
+	* /usr/lib/cgi-bin/start_selenium.sh
+
+	This will launch the selenium instance:
+	java -jar /usr/lib/cgi-bin/selenium-server1_0_3.jar -port 4441 -interactive \
+		-forcedBrowserMode "*firefox /usr/lib/firefox-3.6.3/firefox" -log \
+		"/tmp/selenium${JOBID}.log"
+		
+	* /usr/lib/cgi-bin/web20suicide.cgi
+
+	Core script (or the belly of the web2.0 suicidebeast!)
+	It iterates through the temporary database (friendbot) to see if there are
+	new entries. Once it picks up a new entry, it parses the variables and auto-
+	matically deletes the database 
+
+	web.20suicide.cgi imports several additional python files which hold 
+	specific suicide script functions for each desired platform. Names are 
+	self-explanatory.
+
+	/usr/lib/cgi-bin/suicide_facebook.py
+	/usr/lib/cgi-bin/suicide_linkedin.py
+	/usr/lib/cgi-bin/suicide_myspace.py
+	/usr/lib/cgi-bin/suicide_twitter.py
+
+	* /usr/lib/cgi-bin/web20clean_database.cgi
+
+	Execute this if you have faulty requests inside your mySQL database
+	# python /usr/lib/cgi-bin/web20clean_database.cgi
+
+
+DID YOU KNOW?
+------------------------------------------------------------------------------
+
+
+WHAT NEEDS TO BE DONE?
+------------------------------------------------------------------------------
+
+Things and ideas for the stable release
+
+	Make it more robust (scripts tend to hang if unexpected things happen, such
+			as browser lag, 404 errors, facebook makes automatic logouts from time
+			to time, etc etc etc...)
+	Implemenet more delete functions (improve regular expressions)
+	Implement callback functions
+	Shrink the bootable ISO image
+	
