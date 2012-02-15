@@ -145,8 +145,8 @@ WHAT NEEDS TO BE DONE?
 Things and ideas for the stable release
 
 	* Make it more robust (scripts tend to hang if unexpected things happen, such
-		as browser lag, 404 errors, facebook makes automatic logouts from time
-		to time, etc etc etc...)
+  as browser lag, 404 errors, facebook makes automatic logouts from time
+  to time, etc etc etc...)
 	* Implemenet more delete functions (improve regular expressions)
 	* Implement callback functions
 	* Shrink the bootable ISO image
