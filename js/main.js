@@ -33,7 +33,8 @@ jQuery(document).ready(function($) {
 	$('#login').css('display','none');
 
 	// load some static html
-	$('#signout_others_os').load("http://www.suicidemachine.org/tweets.php");
+//$('#signout_others_os').load("http://www.suicidemachine.org/tweets.php");
+	$('#signout_others_os').load("static/stats.html");
 	$('#feature_header').html('Faster, Safer, Smarter, Better');
 	$('#movie').load("static/movie.html");
 	$('#worm').load("static/worm.html");

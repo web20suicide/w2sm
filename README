@@ -32,6 +32,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+All Selenium projects are licensed under the Apache 2.0 License.
+Read more: http://www.apache.org/licenses/LICENSE-2.0
+
 GENERAL
 ------------------------------------------------------------------------------
 
@@ -76,18 +79,21 @@ Installed software in order to get web2.0 suicidemachine to run:
 All web-related stuff is stored in /var/www/w2sm
 All cgi-scripts in /usr/lib/cgi-bin
 
-An install script which has been used on this release is available in:
-/home/killer/install.sh (if you've booted this release, you DON'T need
-to execute this file AGAIN!!!)
+Please take a look at /usr/lib/cgi-bin/install.sh to get a better understanding
+for the software which has been installed on this system
+This install script was used on this release! (if you've booted this release, 
+you DON'T need to execute this file AGAIN!!!)
 
-Please note that /usr/lib/cgi-bin is under version controlling using GITHUB. 
-If you've done major contributions and/or improvements please commit your 
-changes and mind conflicting stuff. Don't screw things up!
-The password for pushing changes can be requested from killer@moddr.net
+Please note that /usr/lib/cgi-bin and /var/www/w2sm are under version 
+controlling using GITHUB. If you've done major contributions and/or improvements
+or you detected a bug, please commit your changes and mind conflicting stuff. 
+Don't screw things up! Everyone is able to push/pull! We trust YOU!
 
 The GIT repository is hosted at http://www.github.com
 
-Software repository is: https://github.com/web20suicide/w2sm
+Software repositories are for: 
+/var/www/ 				https://github.com/web20suicide/w2sm
+/usr/lib/cgi-bin/	https://github.com/web20suicide/cgi-bin
 
 Once a user completes the form on the website, all his/her information is 
 temporarily stored in a mySQL database (/usr/lib/cgi-bin/web20_dump.cgi).
@@ -103,14 +109,16 @@ Get an overview of the database by typing following URL into your browser:
 
 	* /usr/lib/cgi-bin/settings.py
 
-	Here are setting connections for mySQL stored
+	Here are setting connections for mySQL stored (we used mySQL for queuing
+  user requests and as some sort of "threading" so the cgi request doesn't 
+	time out server-side)
 
 	* /usr/lib/cgi-bin/start_selenium.sh
 
 	This will launch the selenium instance:
-	java -jar /usr/lib/cgi-bin/selenium-server1_0_3.jar -port 4441 -interactive \
-		-forcedBrowserMode "*firefox /usr/lib/firefox-3.6.3/firefox" -log \
-		"/tmp/selenium${JOBID}.log"
+	java -jar /usr/lib/cgi-bin/selenium-server-standalone-2.19.0.jar -port 4441 
+	-interactive -forcedBrowserMode "*firefox /usr/lib/firefox-3.6.3/firefox" \
+	-log "/tmp/selenium${JOBID}.log"
 		
 	* /usr/lib/cgi-bin/web20suicide.cgi
 
@@ -128,6 +136,9 @@ Get an overview of the database by typing following URL into your browser:
 	/usr/lib/cgi-bin/suicide_myspace.py
 	/usr/lib/cgi-bin/suicide_twitter.py
 
+	If you feel like expanding functionality and add a new plattform, please
+	create a new file suicide_NEWPLATTFORM.py etc...
+
 	* /usr/lib/cgi-bin/web20clean_database.cgi
 
 	Execute this if you have faulty requests inside your mySQL database
@@ -137,6 +148,8 @@ Get an overview of the database by typing following URL into your browser:
 DID YOU KNOW?
 ------------------------------------------------------------------------------
 
+Did you know that if you translate 'COCKTAIL' into German 
+you get 'SCHWANZSCHWANZ'?
 
 
 WHAT NEEDS TO BE DONE?
@@ -148,5 +161,5 @@ Things and ideas for the stable release
   as browser lag, 404 errors, facebook makes automatic logouts from time
   to time, etc etc etc...)
 	* Implemenet more delete functions (improve regular expressions)
-	* Implement callback functions
+	* Implement callback functions (selenium 2 seems to be promising!)
 	* Shrink the bootable ISO image
