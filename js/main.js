@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
 		var url = document.location.toString().split('#')[1];	
 		if (url == "latest") {
 			jQuery.facebox(function() {
-				jQuery.get('./latest.php', function(data) {
+				jQuery.get('http://www.suicidemachine.org/latest.php', function(data) {
 					jQuery.facebox(data)
 				})
 			}) 
@@ -54,15 +54,15 @@ jQuery(document).ready(function($) {
 	// fetch button clicks for wall-of-fame pagination
 	$('.pagination').live("click",function() {
 		var getthat = this;
-		$.post("test.php", {page: $(this).html()}, function(data){
+		$.post("http:/www.suicidemachine.org/test.php", {page: $(this).html()}, function(data){
 				$(getthat).parent().html(data);
 			});
 		return false;
 	});
 
-	$('#link_latest').live("click",function() {
+	$('#latest').live("click",function() {
 		jQuery.facebox(function() {
-			jQuery.get('./latest.php', function(data) {
+			jQuery.get('http://www.suicidemachine.org/latest.php', function(data) {
 				jQuery.facebox(data)
 			})
 		}) 

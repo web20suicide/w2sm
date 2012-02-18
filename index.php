@@ -148,7 +148,7 @@
 					<div id="div_link_video"><a id="link_video" href="#movie" rel="facebox" class="subfeature">View Video</a></div>
 				</div>
 				<div id="sub_feature_testimonials"><h2>Testimonials</h2><br>Watch the Who's Who of social network suiciders <br>
-					<div id="div_link_testimonials"><a id="link_testimonials" href="./test.php" rel="facebox[.faq]" class="subfeature">View them all</a></div>
+					<div id="div_link_testimonials"><a id="link_testimonials" href="http://www.suicidemachine.org/test.php" rel="facebox[.faq]" class="subfeature">View them all</a></div>
 				</div>
 				<div id="sub_feature_faq"><h2>FAQ</h2><br>We believe everyone should be able to commit suicide in social networks!<br>
 					<div id="div_link_faq"><a href="#faq" rel="facebox" class="subfeature">Learn how it kills</a></div>
@@ -182,7 +182,8 @@
 					<ul>
 						<li><a href="#movie" rel="facebox">Watch Promo Video</a></li>
 						<li><a href="#movie_twitter" rel="facebox">Untwitter Video</a></li>
-						<li><a href="./test.php" rel="facebox[.testimonials]">Memorial Pages</a></li>
+						<li><a href="http://www.suicidemachine.org/test.php" rel="facebox[.testimonials]">Memorial Pages</a></li>
+						<li><a href="#latest" rel=facebox">Latest</a></li>
 						<li><a href="./static/privacy.html" class="sublinks" rel='facebox[.privacy]'>Privacy Policy</a></li>
 						<li><a href="#faq" rel="facebox">FAQ</a></li>
 					</ul>

@@ -1,23 +1,24 @@
-                                                 web2.0 suicidemachine
-                                                 http://www.suicidemachine.org
+                                                                  web2.0 suicidemachine
+                                                          http://www.suicidemachine.org
                                                  
-                                                 www.moddr.net || www.worm.org
-                                                 killer at moddr dot net
+                                                          www.moddr.net || www.worm.org
+                                                                killer at moddr dot net
                                                  
-                                                 PRE-RELEASE v.1.03
-                                                 February 14, 2012
+                                                                     PRE-RELEASE v.1.03
+                                                                      February 14, 2012
 
 CONTENTS
-------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
 - License
 - General
 - How does it work?
+- Files
 - Did you know?
 - What needs to be done?
 
 LICENSE
-------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -36,7 +37,7 @@ All Selenium projects are licensed under the Apache 2.0 License.
 Read more: http://www.apache.org/licenses/LICENSE-2.0
 
 GENERAL
-------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
 # not for the public and with (really) messy code, but hey it's open source...
 
@@ -65,7 +66,7 @@ Please report all bugs/suggestions to killer@moddr.net or join the irc channel
 This pre-alpha release is distributed under the GPL License.
 
 HOW DOES IT WORK?
-------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
 Installed software in order to get web2.0 suicidemachine to run:
 
@@ -84,6 +85,9 @@ for the software which has been installed on this system
 This install script was used on this release! (if you've booted this release, 
 you DON'T need to execute this file AGAIN!!!)
 
+FILES
+---------------------------------------------------------------------------------------
+
 Please note that /usr/lib/cgi-bin and /var/www/w2sm are under version 
 controlling using GITHUB. If you've done major contributions and/or improvements
 or you detected a bug, please commit your changes and mind conflicting stuff. 
@@ -92,7 +96,7 @@ Don't screw things up! Everyone is able to push/pull! We trust YOU!
 The GIT repository is hosted at http://www.github.com
 
 Software repositories are for: 
-/var/www/ 				https://github.com/web20suicide/w2sm
+/var/www/ 		https://github.com/web20suicide/w2sm
 /usr/lib/cgi-bin/	https://github.com/web20suicide/cgi-bin
 
 Once a user completes the form on the website, all his/her information is 
@@ -100,27 +104,49 @@ temporarily stored in a mySQL database (/usr/lib/cgi-bin/web20_dump.cgi).
 Get an overview of the database by typing following URL into your browser:
 -> http://localhost/phpmyadmin
 
+  -------------------------------------------------------------------------------------
+	* /usr/lib/cgi-bin/google.py
+  -------------------------------------------------------------------------------------
 
+	Basic example showing how Selenium RC works. Before exectuing this file
+	run following command in a terminal: 
+	
+	# java -jar /usr/lib/cgi-bin/selenium-server-standalone-2.19.0.jar -port 4441 
+	-interactive -log "/tmp/selenium${JOBID}.log"
+	
+	open another terminal and run: 
+	# python /usr/lib/cgi-bin/google.py
+
+	Selenium RC will launch Firefox, open www.google.com and automatically
+	trigger a query looking for the word "RANDOM"
+	
+  -------------------------------------------------------------------------------------
 	* /usr/lib/cgi-bin/web20_dump.cgi
+  -------------------------------------------------------------------------------------
 	
 	This script will launch two xterm windows, one for the python script 
 	(web20suicide.cgi) and one for launching the selenium java server 
 	(start_selenium.sh), which will eventually control the Firefox webbrowser.
 
+  -------------------------------------------------------------------------------------
 	* /usr/lib/cgi-bin/settings.py
+  -------------------------------------------------------------------------------------
 
 	Here are setting connections for mySQL stored (we used mySQL for queuing
   user requests and as some sort of "threading" so the cgi request doesn't 
 	time out server-side)
 
+  -------------------------------------------------------------------------------------
 	* /usr/lib/cgi-bin/start_selenium.sh
+  -------------------------------------------------------------------------------------
 
 	This will launch the selenium instance:
-	java -jar /usr/lib/cgi-bin/selenium-server-standalone-2.19.0.jar -port 4441 
-	-interactive -forcedBrowserMode "*firefox /usr/lib/firefox-3.6.3/firefox" \
-	-log "/tmp/selenium${JOBID}.log"
+	# java -jar /usr/lib/cgi-bin/selenium-server-standalone-2.19.0.jar -port 4441 \
+	-interactive -log "/tmp/selenium${JOBID}.log"
 		
+  -------------------------------------------------------------------------------------
 	* /usr/lib/cgi-bin/web20suicide.cgi
+  -------------------------------------------------------------------------------------
 
 	Core script (or the belly of the web2.0 suicidebeast!)
 	It iterates through the temporary database (friendbot) to see if there are
@@ -131,29 +157,33 @@ Get an overview of the database by typing following URL into your browser:
 	specific suicide script functions for each desired platform. Names are 
 	self-explanatory.
 
-	/usr/lib/cgi-bin/suicide_facebook.py
-	/usr/lib/cgi-bin/suicide_linkedin.py
-	/usr/lib/cgi-bin/suicide_myspace.py
-	/usr/lib/cgi-bin/suicide_twitter.py
+  -------------------------------------------------------------------------------------
+	* /usr/lib/cgi-bin/suicide_facebook.py
+	* /usr/lib/cgi-bin/suicide_linkedin.py
+	* /usr/lib/cgi-bin/suicide_myspace.py
+	* /usr/lib/cgi-bin/suicide_twitter.py
+  -------------------------------------------------------------------------------------
 
 	If you feel like expanding functionality and add a new plattform, please
 	create a new file suicide_NEWPLATTFORM.py etc...
 
+  -------------------------------------------------------------------------------------
 	* /usr/lib/cgi-bin/web20clean_database.cgi
+  -------------------------------------------------------------------------------------
 
 	Execute this if you have faulty requests inside your mySQL database
 	# python /usr/lib/cgi-bin/web20clean_database.cgi
 
 
 DID YOU KNOW?
-------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
 Did you know that if you translate 'COCKTAIL' into German 
 you get 'SCHWANZSCHWANZ'?
 
 
 WHAT NEEDS TO BE DONE?
-------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
 Things and ideas for the stable release
 
